@@ -1,9 +1,13 @@
 var reader = require('readline-sync')
-
-class Game {
+interface Game {
     name: string
     genre: string
     minimalAge: number
+}
+class Game {
+    public name: string
+    public genre: string
+    public minimalAge: number
 
     constructor(Gamename: string, Gamegenre: string, PlayminAge) {
         this.name = Gamename
@@ -79,8 +83,9 @@ class Databank {
         this.games.push(game)           
     }
     public removeGame(): void{
+        console.log(this.games)
         let gametoRemove = reader.question("Qual jogo deseja remover? Escreva: ")
-        this.games.find(gametoRemove)
+        this.games = this.games.filter(objGame => objGame.name !== gametoRemove)
     }
     public gameList(): void{
         console.log(this.games)
@@ -115,7 +120,8 @@ while (menu = true) {
     }
 }
 let databank = new Databank()
+databank.addGames(newgame)
 
 let newTableGame = new TableGame("teste", "teste", 12)
 
-databank.addGames(newGame)
+databank.addGames(newgame)
